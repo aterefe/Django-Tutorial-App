@@ -1,4 +1,5 @@
-"""mysite URL Configuration
+"""
+mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -12,10 +13,13 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    3. The include function allows referencing other Urlconf 
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
-
 urlpatterns = [
+    # url for user to interact with the poll or view it
+    url(r'^polls/', include('polls.urls')),
+    # url for admin to create delete ad update poll
     url(r'^admin/', admin.site.urls),
 ]
