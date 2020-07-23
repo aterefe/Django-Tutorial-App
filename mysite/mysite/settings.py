@@ -31,8 +31,14 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+'''
+You can use an app in multiple projects, and you can distribute apps, because they don’t have to be tied to a given Django installation.
+To include the app in our project, we need to add a reference to its configuration class in the INSTALLED_APPS setting
+'''
 
 INSTALLED_APPS = [
+    # The poll application
+    'polls.apps.PollsConfig',
     # The admin site.
     'django.contrib.admin',
     # An authentication system
