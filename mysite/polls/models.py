@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from django.utils import timezone 
 # ! For Python3 you must import datetime from datetime
 from datetime import datetime, timedelta
