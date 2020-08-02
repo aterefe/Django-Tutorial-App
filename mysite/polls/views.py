@@ -1,6 +1,7 @@
 # django.http is module that takes an http
-# Each you write is responsible for instanting populating, and returning an HttpResponse
+# Each you write is responsible for instanting populating, and returning an HttpResponse or render
 from django.http import HttpResponse
+from django.shortcuts import render
 from .models import Question
 # Create your views here.
 
@@ -8,9 +9,10 @@ from .models import Question
 def index(request):
   # getting the top 5 latest question
   latest_quesstion_list = Question.objects.order_by('-pub_date')[:5]
-  # separate each element in list with a comma
-  output = ", ".join([q.question_text for q in latest_quesstion_list])
-  return HttpResponse(output)
+  # context is a dictionary mapping template variable names to Python objects.
+  context = {'latest_question_list' : latest_quesstion_list}
+  # The render() function takes the request object as its first argument, a template name as its second argument and a dictionary as its optional third argument.
+  return render(request, 'polls/index.html', context)
 
 # The detail page displays a question text, with no results but with a form to vote.
 def detail (request, question_id):
