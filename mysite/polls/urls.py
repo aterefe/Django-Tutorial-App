@@ -9,6 +9,7 @@ urlpatterns = [
   # TODOurl(regex, view, kwargs=None, name=None) 
   # The 'r' in front of each regular expression string tells Python that a string is “raw” – that nothing in the string should be escaped
   # !There’s no need to add a leading slash, because every URL has that.
+  # !Adding the nameSpace to the urlCONF allows Django to know which app view to create for a url when using the {% url %} template tag
   # ex: /polls/
   url(r'^$', views.index, name='index'),
   # ex: /polls/<question_id>/
