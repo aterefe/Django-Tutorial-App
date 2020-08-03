@@ -1,8 +1,9 @@
 # django.http is module that takes an http
 # Each you write is responsible for instanting populating, and returning an HttpResponse or render
+# The get_object_or_404() function takes a Django model as its first argument and an arbitrary number of keyword arguments, which it passes to the get() function of the model’s manager.
 from django.http import Http404
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Question
 # Create your views here.
 
@@ -17,10 +18,7 @@ def index(request):
 
 # The detail page displays a question text, with no results but with a form to vote.
 def detail (request, question_id):
-  try: 
-    question = Question.objects.get(pk=question_id)
-  except Question.DoesNotExist:
-    raise Http404("Question does not exist")
+  question = get_object_or_404(Question.objects.get(Question, pk=question_id)) 
   return render(request, 'polls/details.html', {'question': question})
 
 # The results page displays results for a particular question.
