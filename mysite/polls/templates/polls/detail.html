@@ -1,7 +1,15 @@
 <!-- Displays the question and the choices for the specify question -->
+<!-- TODO: POST forms that are targeted at internal URLs should use the {% csrf_token %} template tag -->
 <h1>{{ question.question_text }}</h1>
-<ul>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<!-- ! when somebody selects one of the radio buttons and submits the form, it’ll send the POST data choice=# where # is the ID of the selected choice. -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+  {% csrf_token %}
   {% for choice in question.choice_set.all %}
-  <li>{{ choice.choice_text }}</li>
+  <!-- how many times the for tag has   -->
+  <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+  <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
   {% endfor %}
-</ul>
+  <input type="submit" value="Vote" />
+</form>
