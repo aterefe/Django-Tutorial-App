@@ -4,7 +4,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <!-- ! when somebody selects one of the radio buttons and submits the form, it’ll send the POST data choice=# where # is the ID of the selected choice. -->
-<form action="{% url 'polls:vote' question.id %}" method="post">
+<form action="{% url 'vote' question.id %}" method="post">
   {% csrf_token %}
   {% for choice in question.choice_set.all %}
   <!-- how many times the for tag has   -->
