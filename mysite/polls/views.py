@@ -19,8 +19,8 @@ def index(request):
 
 # The detail page displays a question text, with no results but with a form to vote.
 def detail (request, question_id):
-  question = get_object_or_404(Question.objects.get(Question, pk=question_id)) 
-  return render(request, 'polls/details.html', {'question': question})
+  question = get_object_or_404(Question, id=question_id) 
+  return render(request, 'polls/detail.html', {'question': question})
 
 # The results page displays results for a particular question.
 def results(request, question_id):
