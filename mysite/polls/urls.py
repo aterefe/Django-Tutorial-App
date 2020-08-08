@@ -11,11 +11,11 @@ urlpatterns = [
   # !There’s no need to add a leading slash, because every URL has that.
   # !Adding the nameSpace to the urlCONF allows Django to know which app view to create for a url when using the {% url %} template tag
   # ex: /polls/
-  url(r'^$', views.index, name='index'),
-  # ex: /polls/<question_id>/
-  url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
-  # ex: /polls/<question_id>/results
-  url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name="results"),
+  url(r'^$', views.IndexView.as_view(), name='index'),
+  # ex: /polls/<pk>/ 
+  url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+  # ex: /polls/<pk>/results
+  url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name="results"),
   # ex:
   url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote')
 ]
