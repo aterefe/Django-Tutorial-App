@@ -8,6 +8,9 @@ from django.views import generic
 from .models import Choice, Question
 # Create your views here.
 
+# template_name attribute is used to tell Django to use a specific template name
+# the model attribute needs to know what model it will be acting upon
+# !for ListView, the automatically generated context variable is question_list. To override this we provide the context_object_name attribute
 class IndexView(generic.ListView):
   template_name = 'polls/index.html'
   context_object_name = 'latest_question_list'
@@ -15,13 +18,14 @@ class IndexView(generic.ListView):
     """Return the last five published questions."""
     return Question.objects.order_by('-pub_date')[:5]
 
+# !the DetailView generic view uses a template called <app name>/<model name>_detail.html
 class DetailView(generic.DetailView):
   model = Question
   template_name = 'polls/detail.html'
 
 class ResultsView(generic.DetailView):
   model = Question
-  template_name = 'polls/detail.html'
+  template_name = 'polls/result.html'
 
 # The vote action handles voting for a particular choice in a particular question.
 def vote (request, question_id):
