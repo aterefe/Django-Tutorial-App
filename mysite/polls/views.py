@@ -25,7 +25,7 @@ def detail (request, question_id):
 # The results page displays results for a particular question.
 def results(request, question_id):
   question = get_object_or_404(Question, pk=question_id)
-  return render(request, 'polls/results.html', {'question': question})
+  return render(request, 'polls/result.html', {'question': question})
 
 # The vote action handles voting for a particular choice in a particular question.
 def vote (request, question_id):
@@ -45,4 +45,4 @@ def vote (request, question_id):
     selected_choice.save()
     # Always return an HttpResponseRedirect after successfully dealing with POST data. 
     # This prevents data from being posted twice if a user hits the Back button.
-    return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+    return HttpResponseRedirect(reverse('results', args=(question.id,)))
