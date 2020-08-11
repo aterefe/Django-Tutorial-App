@@ -3,6 +3,7 @@
 # The get_object_or_404() function takes a Django model as its first argument and an arbitrary number of keyword arguments, which it passes to the get() function of the model’s manager.
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from .models import Choice, Question
@@ -15,8 +16,14 @@ class IndexView(generic.ListView):
   template_name = 'polls/index.html'
   context_object_name = 'latest_question_list'
   def get_queryset(self):
-    """Return the last five published questions."""
-    return Question.objects.order_by('-pub_date')[:5]
+    """
+    Return the last five published questions (not including those set to be
+    published in the future).
+    """
+    # returns a queryset containing Questions whose pub_date is less than or equal to - that is, earlier than or equal to - timezone.now.
+    return Question.objects.filter(
+      pub_date__lte=timezone.now()
+    ).order_by('-pub_date')[:5]
 
 # !the DetailView generic view uses a template called <app name>/<model name>_detail.html
 class DetailView(generic.DetailView):
