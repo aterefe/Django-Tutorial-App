@@ -45,6 +45,7 @@ def create_question(question_text, days):
 
 # .assertContains asserts that a Response instance produced the given status_code and that text appears in the content of the response.
 # .assertQuerysetEqual Asserts that a queryset qs returns a particular list of values values.
+# .assertEqual test if the first argument and second argument are equal.
 class QuestionIndexViewTests(TestCase):
     def test_no_questions(self):
         """
